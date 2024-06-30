@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScreenSaver</title>
+    <style>
+        body{
+            background-image: url(img.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .container{
+            width: 800px;
+            height: 180px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px #333;
+        }
+        @font-face {
+            font-family: myfont;
+            src: url('Sarlotte.otf');
+        }
+        .clock{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(red, green, blue, alpha);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .clock span{
+            font-size: 100px;
+            font-weight: 900;
+            width: 110px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            font-family: myfont;          
+        }
+        .clock span::after{
+            font-size: 16px;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #hrs::after{
+            content: 'HOURS';
+        }
+        #mins::after{
+            content: 'MINUTES';
+        }
+        #secs::after{
+            content: 'SECONDS';
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="clock">
+            <span id="hrs">00</span>
+            <span>:</span>
+            <span id="mins">00</span>
+            <span>:</span>
+            <span id="secs">00</span>
+        </div>
+    </div>
+    <audio autoplay loop>
+        <source src="infinite.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        let hrs = document.getElementById("hrs");
+        let mins = document.getElementById("mins");
+        let secs = document.getElementById("secs");
+
+        setInterval(()=>{
+            let currentTime = new Date();
+
+            hrs.innerHTML = (currentTime.getHours()<10?"0":"") + currentTime.getHours(); 
+            mins.innerHTML = (currentTime.getMinutes()<10?"0":"") + currentTime.getMinutes();
+            secs.innerHTML = (currentTime.getSeconds()<10?"0":"") + currentTime.getSeconds();
+        },1000)
+
+        
+    </script>
+
+</body>
+</html>
